@@ -1,0 +1,89 @@
+{
+  "name": "host-app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "electron-main.cjs",
+  "scripts": {
+    "dev": "vite --port 3000",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview --port 3000",
+    "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron:build": "npm run build && electron-builder"
+  },
+  "build": {
+    "appId": "com.omnisearch.hub",
+    "productName": "OmniSearch Hub",
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/**/*",
+      "electron-main.cjs"
+    ],
+    "extraResources": [
+      {
+        "from": "../web-links-mfe/dist",
+        "to": "web-links-mfe/dist"
+      },
+      {
+        "from": "../gallery-mfe/dist",
+        "to": "gallery-mfe/dist"
+      },
+      {
+        "from": "../video-mfr/dist",
+        "to": "video-mfr/dist"
+      },
+      {
+        "from": "../image-search-backend/src",
+        "to": "image-search-backend/src"
+      },
+      {
+        "from": "../image-search-backend/package.json",
+        "to": "image-search-backend/package.json"
+      },
+      {
+        "from": "../image-search-backend/node_modules",
+        "to": "image-search-backend/node_modules"
+      }
+    ]
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/cli": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
+    "lucide-react": "^1.47.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "serve-handler": "^6.1.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@originjs/vite-plugin-federation": "^1.4.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "autoprefixer": "^10.6.1",
+    "concurrently": "^10.0.5",
+    "electron": "^44.4.4",
+    "electron-builder": "^26.15.3",
+    "eslint": "^10.10.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.6",
+    "globals": "^17.12.0",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.3.0",
+    "wait-on": "^9.1.0"
+  }
+}

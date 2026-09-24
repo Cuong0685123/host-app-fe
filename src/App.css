@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset Stacking Context cho Host App */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #020617; /* Slate 950 */
+  color: #f8fafc;
+  overflow-x: hidden;
+}
+
+/* Ép modal/popup phủ kín toàn màn hình */
+div[class*="fixed"][class*="inset-0"],
+dialog {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  z-index: 999999 !important;
+}
+
+/* ÉP TẤT CẢ Ô INPUT: Cứ gõ chữ vào là phải có màu chữ đen đậm rõ nét */
+input, textarea, select {
+  color: #0f172a !important; /* Màu đen slate-900 */
+  -webkit-text-fill-color: #0f172a !important; /* Chống bị trình duyệt ép màu trắng trên Chrome/Edge */
+}
+
+/* Đổi màu placeholder sang xám để dễ nhìn */
+input::placeholder, textarea::placeholder {
+  color: #64748b !important; /* slate-500 */
+  -webkit-text-fill-color: #64748b !important;
+}
+
+/* Tùy chỉnh thanh cuộn */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
