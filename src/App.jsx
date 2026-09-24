@@ -1,5 +1,5 @@
 import React, { useState, Suspense, lazy } from 'react';
-import { Image, Globe, Video, Loader2, Sparkles, Compass, Search } from 'lucide-react';
+import { Image, Globe, Video, Compass, Search } from 'lucide-react';
 
 const ImageSearchGallery = lazy(() => import('gallery/ImageSearchGallery'));
 const WebSearch = lazy(() => import('web_links/WebSearchList'));
@@ -15,23 +15,26 @@ export default function App() {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-slate-950 text-slate-100 flex flex-col antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden">
-      {/* Header tối ưu chuẩn Mobile */}
-      <header className="w-full bg-slate-900/80 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-40">
-        <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 py-2.5 sm:h-16 flex flex-wrap items-center justify-between gap-2">
+    <div className="w-full min-h-screen bg-slate-950 text-slate-100 flex flex-col antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
+      
+      {/* Header chuẩn hóa Mobile & Desktop */}
+      <header className="w-full bg-slate-900/90 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-40 px-3 sm:px-6 py-2.5 sm:py-3">
+        <div className="w-full max-w-xl sm:max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 sm:gap-4">
           
           {/* Logo & Tên ứng dụng */}
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 to-cyan-500 text-white flex items-center justify-center shadow-md shadow-blue-500/20 shrink-0">
-              <Compass size={18} className="animate-pulse" />
-            </div>
-            <div className="flex items-center gap-1.5 font-bold text-sm sm:text-base tracking-tight text-white">
-              OmniSearch <span className="text-[9px] px-1 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono">HUB</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white flex items-center justify-center shadow-md shadow-blue-500/20 shrink-0">
+                <Compass size={18} className="animate-pulse" />
+              </div>
+              <div className="flex items-center gap-1.5 font-bold text-base tracking-tight text-white">
+                OmniSearch <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono">HUB</span>
+              </div>
             </div>
           </div>
 
-          {/* Navigation Tabs: Tự co gọn trên mobile */}
-          <nav className="flex items-center bg-slate-950/70 p-1 rounded-xl border border-slate-800 shrink-0">
+          {/* Navigation Tabs: Trên Mobile chia 3 cột đều tăm tắp, trên Desktop thu gọn tự nhiên */}
+          <nav className="w-full sm:w-auto grid grid-cols-3 sm:flex items-center bg-slate-950/80 p-1 rounded-xl border border-slate-800 gap-1 shrink-0">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -39,7 +42,7 @@ export default function App() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
+                  className={`flex items-center justify-center gap-1.5 py-2 px-2 sm:px-4 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer ${
                     isActive
                       ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
@@ -51,14 +54,15 @@ export default function App() {
               );
             })}
           </nav>
+
         </div>
       </header>
 
       {/* Vùng hiển thị Module Micro-Frontend */}
-      <main className="w-full max-w-7xl mx-auto px-2 sm:px-6 py-4 flex-1 flex flex-col overflow-x-hidden">
+      <main className="w-full max-w-xl sm:max-w-7xl mx-auto px-3 sm:px-6 py-4 flex-1 flex flex-col overflow-x-hidden">
         <Suspense
           fallback={
-            <div className="flex-1 flex flex-col items-center justify-center py-32 text-slate-400 gap-3">
+            <div className="flex-1 flex flex-col items-center justify-center py-28 text-slate-400 gap-3">
               <div className="relative">
                 <div className="w-10 h-10 rounded-full border-2 border-blue-500/20 border-t-blue-500 animate-spin" />
                 <Search size={16} className="absolute inset-0 m-auto text-blue-400" />
